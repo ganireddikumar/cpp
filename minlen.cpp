@@ -1,55 +1,16 @@
 #include <iostream>
-// #include "solution.h"
+#include <cstring>
 using namespace std;
-
-/* input - Input String
- *  output - Save the result in the output array (passed as argument). You don’t have to
- *  print or return the result
- */
-
-int strlen(char input[])
-{
-    int count = 0;
-    for (int i = 0; input[i] != '\0'; i++)
-    {
-        count++;
-    }
-    return count;
-}
-
-void saveOutput(char input[], char output[], int start, int end)
-{
-    int j = 0;
-    while (start <= end)
-    {
-        output[j] = input[start];
-        j++;
-        start++;
-    }
-    output[j] = '\0';
-}
 
 void minLengthWord(char input[], char output[])
 {
-
-    // Write your code here
     int min = 100000;
     int count = 0;
     int start = 0;
 
     for (int i = 0; input[i] != '\0'; i++)
     {
-
-        if (i == (strlen(input) - 1))
-        {
-            count++;
-            if (min > count)
-            {
-                min = count;
-                saveOutput(input, output, start, i);
-            }
-        }
-        else if (input[i] != ' ')
+        if (input[i] != ' ')
         {
             count++;
         }
@@ -58,12 +19,23 @@ void minLengthWord(char input[], char output[])
             if (min > count)
             {
                 min = count;
-                saveOutput(input, output, start, i - 1);
+                start = i - count;
             }
             count = 0;
-            start = i + 1;
         }
     }
+
+    if (min > count)
+    {
+        start = strlen(input) - count;
+    }
+
+    for (int i = start, j = 0; i < start + min; i++, j++)
+    {
+        output[j] = input[i];
+    }
+
+    output[min] = '\0';
 }
 
 int main()
