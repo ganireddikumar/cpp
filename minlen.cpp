@@ -1,9 +1,10 @@
 #include <iostream>
 #include <cstring>
+#include <climits>
 using namespace std;
 void minLengthWord(char input[], char output[])
 {
-    int min = 100000;
+    int min = INT_MAX;
     int count = 0;
     int start = 0;
     for (int i = 0; input[i] != '\0'; i++)
